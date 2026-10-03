@@ -1,0 +1,30 @@
+# Gradle / ForgeGradle 构建产物
+build/*
+!build/libs/
+build/libs/*
+!build/libs/*.jar
+.gradle/
+run/
+run-data/
+mcmodsrepo/
+
+# IDE
+.idea/
+*.iml
+.eclipse/
+.settings/
+.classpath
+.project
+.vscode/
+
+# 系统
+Thumbs.db
+.DS_Store
+
+# 第三方二进制依赖（编译期需要，请自行放入 libs/）
+# Cloth Config 版权归其作者，未随仓库分发
+libs/*.jar
+
+# 日志 / 崩溃报告
+logs/
+crash-reports/
