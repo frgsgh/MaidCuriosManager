@@ -13,5 +13,22 @@
   "maidcuriosmanager.gui.nbt_back": "列表",
   "maidcuriosmanager.gui.saved": "已写入女仆 NBT",
   "maidcuriosmanager.gui.unsaved": "未保存修改：%s",
-  "maidcuriosmanager.gui.nbt_hint": "饰品 NBT 数据预览（只读，滚轮浏览）"
+  "maidcuriosmanager.gui.nbt_hint": "饰品 NBT 数据预览（只读，滚轮浏览）",
+
+  "gui.maidcuriosmanager.open_manager": "饰品管理",
+  "gui.maidcuriosmanager.open_manager.desc": "打开当前女仆的饰品管理界面",
+
+  "key.categories.touhou_little_maid": "车万女仆",
+  "key.maidcuriosmanager.open_manager": "打开饰品管理界面",
+  "key.maidcuriosmanager.open_manager_in_maid_gui": "在女仆界面内打开饰品管理",
+
+  "config.maidcuriosmanager.category": "女仆饰品管理",
+  "config.maidcuriosmanager.enable_manager": "启用饰品管理模组",
+  "config.maidcuriosmanager.enable_manager.tooltip": "总开关。关闭后快捷键不再响应、右键女仆不再打开饰品管理界面、女仆界面上的入口也会隐藏。此项只控制本模组，不影响车万女仆自带的「启用女仆 Curios 饰品栏支持」。",
+  "config.maidcuriosmanager.open_manager_key": "打开饰品管理界面：快捷键",
+  "config.maidcuriosmanager.open_manager_key.tooltip": "随时随地按下即可管理准星所注视的女仆的饰品。与「选项 → 按键绑定」中的设置是同一个按键。",
+  "config.maidcuriosmanager.open_manager_in_gui_key": "女仆界面内打开饰品管理：快捷键",
+  "config.maidcuriosmanager.open_manager_in_gui_key.tooltip": "仅在女仆界面打开时生效，直接对当前女仆打开饰品管理界面。",
+
+  "message.maidcuriosmanager.no_maid_in_sight": "没有注视任何女仆"
 }

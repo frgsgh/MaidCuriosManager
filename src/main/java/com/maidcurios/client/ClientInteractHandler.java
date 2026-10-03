@@ -29,6 +29,9 @@ public final class ClientInteractHandler {
         if (!player.level().isClientSide) {
             return;
         }
+        if (!MaidCuriosConfig.isManagerEnabled()) {
+            return;
+        }
         if (event.getHand() != InteractionHand.MAIN_HAND) {
             return;
         }

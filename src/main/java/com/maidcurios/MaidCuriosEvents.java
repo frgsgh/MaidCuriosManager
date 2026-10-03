@@ -24,6 +24,9 @@ public final class MaidCuriosEvents {
         if (player.level().isClientSide) {
             return; // 客户端由 ClientInteractHandler 处理
         }
+        if (!MaidCuriosConfig.isManagerEnabled()) {
+            return;
+        }
         if (event.getHand() != InteractionHand.MAIN_HAND) {
             return;
         }

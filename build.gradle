@@ -70,6 +70,10 @@ dependencies {
 
     // Curios API 源码中使用了 @ApiStatus 等注解
     compileOnly 'org.jetbrains:annotations:24.0.0'
+
+    // Cloth Config：用于把本模组的开关/快捷键注入车万女仆的「全局设置」界面。
+    // 运行时由 Cloth Config 本体提供（车万女仆的全局设置本来就依赖它）。
+    compileOnly files('libs/cloth-config-forge-11.1.106.jar')
 }
 
 // 资源占位符替换（mods.toml / pack.mcmeta）

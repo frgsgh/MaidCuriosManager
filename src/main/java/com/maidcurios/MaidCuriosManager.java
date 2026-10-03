@@ -9,6 +9,7 @@ import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.ModList;
 import org.slf4j.Logger;
 
 /**
@@ -33,15 +34,27 @@ public final class MaidCuriosManager {
         // 服务端侧拦截右键，防止车万女仆自带的右键菜单被同时打开
         MinecraftForge.EVENT_BUS.register(MaidCuriosEvents.class);
 
-        // 客户端侧拦截右键并打开饰品管理界面
+        // 客户端侧拦截右键并打开饰品管理界面，同时注册快捷键与界面钩子
         DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> ClientRegistration::registerForgeBus);
+        DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> () -> ClientRegistration.registerModBus(modBus));
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
             MaidCuriosNetwork.register();
             MaidTypeHelper.init();
-            LOGGER.info("Maid Curios Manager common setup done.");
+            LOGGER.info("Maid Curios Manager {} loaded. Touhou Little Maid present: {}, maxSlotsPerType config: {}",
+                    ModList.get().getModContainerById(MODID).map(c -> c.getModInfo().getVersion().toString()).orElse("?"),
+                    MaidTypeHelper.isTouhouLittleMaidLoaded(),
+                    safeMaxSlots());
         });
+    }
+
+    private static String safeMaxSlots() {
+        try {
+            return String.valueOf(MaidCuriosConfig.MAX_SLOTS_PER_TYPE.get());
+        } catch (IllegalStateException e) {
+            return "config not loaded yet";
+        }
     }
 }

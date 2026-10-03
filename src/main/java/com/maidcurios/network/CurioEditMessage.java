@@ -1,7 +1,9 @@
 package com.maidcurios.network;
 
 import com.maidcurios.MaidCuriosConfig;
+import com.maidcurios.MaidCuriosManager;
 import com.maidcurios.MaidTypeHelper;
+import java.lang.reflect.Method;
 import java.util.function.Supplier;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerLevel;
@@ -76,6 +78,16 @@ public class CurioEditMessage {
             ServerLevel level = player.serverLevel();
             Entity entity = level.getEntity(msg.entityId);
             if (!MaidTypeHelper.isMaid(entity) || !(entity instanceof LivingEntity living)) {
+                MaidCuriosManager.LOGGER.warn(
+                        "[maidcurios] edit request for entity {} rejected: not a maid (found {}).",
+                        msg.entityId, entity);
+                return;
+            }
+            if (!CuriosApi.getCuriosInventory(living).isPresent()) {
+                MaidCuriosManager.LOGGER.warn(
+                        "[maidcurios] edit request for maid {} rejected: no Curios inventory capability. "
+                                + "Is Touhou Little Maid's 'enable_maid_curios' option enabled?",
+                        msg.entityId);
                 return;
             }
             CuriosApi.getCuriosInventory(living).ifPresent(handler -> msg.apply(handler));
@@ -83,11 +95,49 @@ public class CurioEditMessage {
         ctx.setPacketHandled(true);
     }
 
+    /**
+     * 让某类槽位 +1。
+     *
+     * <p>用反射调用 {@code growSlotType}：它在 Curios 5.14.1 已被标记
+     * {@code @Deprecated(forRemoval)}，直接调用会产生编译告警；反射还有一个好处，
+     * 若将来该 API 被移除，只会在这里安静失败并留下日志，而不是让整个模组加载失败。
+     */
+    private static void growSlotTypeReflectively(ICuriosItemHandler handler, String slotId) {
+        try {
+            Method method = handler.getClass().getMethod("growSlotType", String.class, int.class);
+            method.invoke(handler, slotId, 1);
+        } catch (Throwable t) {
+            MaidCuriosManager.LOGGER.error("[maidcurios] failed to grow slot type {}", slotId, t);
+        }
+    }
+
+    private static void shrinkSlotTypeReflectively(ICuriosItemHandler handler, String slotId) {
+        try {
+            Method method = handler.getClass().getMethod("shrinkSlotType", String.class, int.class);
+            method.invoke(handler, slotId, 1);
+        } catch (Throwable t) {
+            MaidCuriosManager.LOGGER.error("[maidcurios] failed to shrink slot type {}", slotId, t);
+        }
+    }
+
     private void apply(ICuriosItemHandler handler) {
         switch (action) {
             case GROW_SLOT -> handler.getStacksHandler(slotId).ifPresent(sh -> {
-                if (sh.getStacks().getSlots() < MaidCuriosConfig.MAX_SLOTS_PER_TYPE.get()) {
-                    handler.growSlotType(slotId, 1);
+                IDynamicStackHandler stacks = sh.getStacks();
+                int before = stacks.getSlots();
+                int cap = MaidCuriosConfig.MAX_SLOTS_PER_TYPE.get();
+                if (before < cap) {
+                    // growSlotType 已标记 @Deprecated(forRemoval)，用反射调用避免编译告警
+                    growSlotTypeReflectively(handler, slotId);
+                    // 注意：growSlotType 内部会重建/调整 handler，必须重新取一次
+                    int after = handler.getStacksHandler(slotId)
+                            .map(h -> h.getStacks().getSlots())
+                            .orElse(stacks.getSlots());
+                    MaidCuriosManager.LOGGER.info(
+                            "[maidcurios] GROW_SLOT slot={} {} -> {} (cap={})", slotId, before, after, cap);
+                } else {
+                    MaidCuriosManager.LOGGER.info(
+                            "[maidcurios] GROW_SLOT ignored for slot={} because {} >= cap {}", slotId, before, cap);
                 }
             });
             case SHRINK_SLOT -> handler.getStacksHandler(slotId).ifPresent(sh -> {
@@ -100,7 +150,7 @@ public class CurioEditMessage {
                 if (!stacks.getStackInSlot(size - 1).isEmpty()) {
                     return;
                 }
-                handler.shrinkSlotType(slotId, 1);
+                shrinkSlotTypeReflectively(handler, slotId);
             });
             case SET_COUNT -> handler.getStacksHandler(slotId).ifPresent(sh -> {
                 IDynamicStackHandler stacks = sh.getStacks();

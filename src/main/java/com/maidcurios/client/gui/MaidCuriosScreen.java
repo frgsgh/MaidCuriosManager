@@ -245,6 +245,9 @@ public class MaidCuriosScreen extends Screen {
             return;
         }
         for (Op op : ops) {
+            MaidCuriosManager.LOGGER.info(
+                    "[maidcurios] sending {} slot={} index={} value={} for maid id={}",
+                    op.action, op.slotId, op.index, op.value, maid.getId());
             MaidCuriosNetwork.CHANNEL.sendToServer(
                     new CurioEditMessage(maid.getId(), op.slotId, op.index, op.action, op.value));
         }
