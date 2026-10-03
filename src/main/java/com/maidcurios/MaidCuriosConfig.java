@@ -19,7 +19,15 @@ public final class MaidCuriosConfig {
      */
     public static final ForgeConfigSpec.BooleanValue ENABLE_MANAGER;
 
-    /** 是否要求潜行 + 右键女仆才打开管理界面（默认 true，避免与车万女仆自带右键菜单冲突）。 */
+    /**
+     * 【已停用】原来控制「是否必须潜行右键女仆才打开界面」。
+     *
+     * <p>「潜行 + 右键女仆」这个入口已按需求移除，因此该项不再有任何作用。
+     * 保留字段是为了不破坏玩家已有的配置文件；将来如确认无需保留可整体删除。
+     *
+     * @deprecated 右键入口已移除，此项无效。
+     */
+    @Deprecated
     public static final ForgeConfigSpec.BooleanValue REQUIRE_SNEAK;
 
     /** 每类饰品槽位通过本模组最多可扩充到的槽位数上限。 */
@@ -42,9 +50,10 @@ public final class MaidCuriosConfig {
 
         REQUIRE_SNEAK = builder
                 .comment(
-                        "Require the player to sneak (shift) while right-clicking a maid to open the curio manager screen.",
-                        "潜行时右键女仆才会打开饰品管理界面，避免与车万女仆自带的右键菜单冲突。",
-                        "Set to false to open the manager on every right-click on a maid.")
+                        "DEPRECATED - has no effect. The 'sneak + right-click a maid' entry point was removed;",
+                        "the only entry point is the rebindable hotkey used inside the maid GUI.",
+                        "【已停用】该项已无效：潜行右键女仆的入口已被移除，",
+                        "现在唯一的入口是女仆界面内的可改键快捷键。保留仅为兼容旧配置文件。")
                 .define("requireSneak", true);
 
         MAX_SLOTS_PER_TYPE = builder

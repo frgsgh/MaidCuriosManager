@@ -15,10 +15,11 @@ public final class ClientRegistration {
         modBus.addListener(MaidCuriosKeybinds::register);
     }
 
-    /** Forge 事件总线：界面钩子、快捷键处理、配置界面注入。 */
+    /** Forge 事件总线：快捷键处理、配置界面注入。 */
     public static void registerForgeBus() {
-        MinecraftForge.EVENT_BUS.register(ClientInteractHandler.class);
-        MinecraftForge.EVENT_BUS.register(new MaidGuiHooks());
+        // 说明：以下两项已按需求停用，但源码保留在仓库中以免误删：
+        //   ClientInteractHandler —— 潜行 + 右键女仆打开界面
+        //   MaidGuiHooks          —— 女仆界面侧边栏的入口按钮
         MinecraftForge.EVENT_BUS.register(new MaidGuiKeyHandler());
         if (MaidCuriosClothCompat.isClothConfigLoaded()) {
             MinecraftForge.EVENT_BUS.register(new MaidCuriosConfigScreen());

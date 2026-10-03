@@ -18,17 +18,14 @@
   "gui.maidcuriosmanager.open_manager": "Curios",
   "gui.maidcuriosmanager.open_manager.desc": "Open the curio manager for this maid",
 
-  "key.categories.touhou_little_maid": "Touhou Little Maid",
-  "key.maidcuriosmanager.open_manager": "Open Curio Manager",
+  "key.categories.maidcuriosmanager": "Maid Curio Manager",
   "key.maidcuriosmanager.open_manager_in_maid_gui": "Open Curio Manager in Maid GUI",
 
   "config.maidcuriosmanager.category": "Maid Curio Manager",
   "config.maidcuriosmanager.enable_manager": "Enable Maid Curio Manager",
-  "config.maidcuriosmanager.enable_manager.tooltip": "Master switch. When off: hotkeys stop responding, right-clicking a maid no longer opens the manager, and the maid GUI entry is hidden. This only controls this mod; Touhou Little Maid's own 'enable_maid_curios' option is unaffected.",
-  "config.maidcuriosmanager.open_manager_key": "Open Curio Manager: hotkey",
-  "config.maidcuriosmanager.open_manager_key.tooltip": "Opens the manager for the maid you are looking at. This is the same binding as the one in Options -> Controls.",
+  "config.maidcuriosmanager.enable_manager.tooltip": "Master switch. When off: the hotkey stops responding and the maid GUI entry is hidden. This only controls this mod; Touhou Little Maid's own 'enable_maid_curios' option is unaffected.",
   "config.maidcuriosmanager.open_manager_in_gui_key": "Open Curio Manager in maid GUI: hotkey",
-  "config.maidcuriosmanager.open_manager_in_gui_key.tooltip": "Only works while a maid GUI is open; opens the manager for that maid.",
+  "config.maidcuriosmanager.open_manager_in_gui_key.tooltip": "Only works while a maid GUI is open; opens the manager for that maid. Same binding as Options -> Controls -> Maid Curio Manager.",
 
   "message.maidcuriosmanager.no_maid_in_sight": "No maid in sight"
 }

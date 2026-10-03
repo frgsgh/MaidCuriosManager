@@ -50,14 +50,6 @@ public final class MaidCuriosConfigScreen {
                 .setSaveConsumer(MaidCuriosConfig.ENABLE_MANAGER::set)
                 .build());
 
-        Object openManagerKey = keyMappingField("OPEN_MANAGER");
-        if (openManagerKey instanceof net.minecraft.client.KeyMapping mapping) {
-            category.addEntry(entry.fillKeybindingField(
-                            Component.translatable("config.maidcuriosmanager.open_manager_key"), mapping)
-                    .setTooltip(Component.translatable("config.maidcuriosmanager.open_manager_key.tooltip"))
-                    .build());
-        }
-
         Object inGuiKey = keyMappingField("OPEN_MANAGER_IN_MAID_GUI");
         if (inGuiKey instanceof net.minecraft.client.KeyMapping mapping) {
             category.addEntry(entry.fillKeybindingField(
@@ -66,7 +58,7 @@ public final class MaidCuriosConfigScreen {
                     .build());
         }
 
-        MaidCuriosManager.LOGGER.info("[maidcurios] injected settings (enable toggle + 2 hotkeys) into TLM global config.");
+        MaidCuriosManager.LOGGER.info("[maidcurios] injected settings (enable toggle + hotkey) into TLM global config.");
     }
 
     /**
