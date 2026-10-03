@@ -33,8 +33,8 @@ public final class MaidCuriosManager {
         // 通用（服务端）配置
         MaidCuriosConfig.register();
 
-        // 注意：服务端侧原来还会拦截「潜行 + 右键女仆」，该功能已按需求移除，
-        // 因此这里不再注册 MaidCuriosEvents（入口只保留一个可改键的快捷键）。
+        // 入口只有一个：女仆界面内可改键的快捷键（见 client 包）。
+        // 原「潜行 + 右键女仆」的服务端/客户端拦截已连同其类一并删除。
 
         // 客户端侧：注册快捷键与配置注入
         DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> ClientRegistration::registerForgeBus);

@@ -33,6 +33,8 @@ Forge 1.20.1 小工具模组：通过 GUI 管理**车万女仆（Touhou Little M
 | maxSlotsPerType | 64 | 每类槽位可扩充到的最大槽位数（上限 64） |
 | maxStackCount | 64 | 饰品堆叠数量可设置的上限 |
 
+> 说明：原先的 `requireSneak` 已随「潜行 + 右键女仆」入口一并删除，不再存在。
+
 > ⚠️ **升级提示**：Forge **不会**因为默认值变化而覆盖你已有的配置文件。
 > 早期版本默认 `maxSlotsPerType = 8`，升级后旧配置文件里仍然写着 8，表现为
 > 「槽位最多只能加到 8」。请把该值改成 `64`，或直接删除
@@ -74,17 +76,14 @@ gradlew.bat build
 ```
 src/main/java/com/maidcurios/
 ├── MaidCuriosManager.java        # @Mod 主类
-├── MaidCuriosConfig.java         # Forge 配置（含总开关 enableManager）
-├── MaidCuriosEvents.java         # 【已停用】服务端右键拦截（源码保留）
+├── MaidCuriosConfig.java         # Forge 配置（总开关 + 两个上限）
 ├── MaidCuriosNetwork.java        # SimpleChannel 网络通道
 ├── MaidTypeHelper.java           # 车万女仆反射软依赖（实体）
 ├── network/CurioEditMessage.java # C2S 修改请求包
 └── client/
     ├── ClientRegistration.java   # 客户端注册入口
-    ├── ClientInteractHandler.java# 【已停用】客户端右键打开界面（源码保留）
     ├── MaidCuriosKeybinds.java   # 快捷键（可改键，独立分类）
     ├── MaidGuiKeyHandler.java    # 快捷键触发逻辑
-    ├── MaidGuiHooks.java         # 【已停用】女仆界面侧边栏入口按钮（源码保留）
     ├── MaidCuriosConfigScreen.java # 注入「全局设置」的开关与快捷键
     ├── MaidCuriosClothCompat.java# Cloth Config 存在性检查
     ├── TlmCompat.java            # 车万女仆 GUI 反射桥接

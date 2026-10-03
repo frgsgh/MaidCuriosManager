@@ -6,6 +6,15 @@ import net.minecraftforge.fml.config.ModConfig;
 
 /**
  * 模组通用配置（config/maidcuriosmanager-common.toml）。
+ *
+ * <p>只保留真正被使用的选项：
+ * <ul>
+ *   <li>{@link #ENABLE_MANAGER} —— 总开关，同时显示在车万女仆的「全局设置」界面；</li>
+ *   <li>{@link #MAX_SLOTS_PER_TYPE} —— 每类饰品槽位可扩充到的上限；</li>
+ *   <li>{@link #MAX_STACK_COUNT} —— 单个饰品槽位的堆叠数量上限。</li>
+ * </ul>
+ *
+ * <p>原先的 {@code requireSneak} 已随「潜行 + 右键女仆」入口一起移除，不再存在。
  */
 public final class MaidCuriosConfig {
     public static final ForgeConfigSpec SPEC;
@@ -13,22 +22,11 @@ public final class MaidCuriosConfig {
     /**
      * 全局总开关（显示在车万女仆「全局设置」界面）。
      *
-     * <p>关闭后本模组完全停用：不注册/不响应按键、右键女仆不再打开管理界面、
-     * 女仆界面上的入口按钮也不显示。本开关只控制本模组自身，
-     * 与车万女仆自带的 {@code enable_maid_curios}（是否启用女仆饰品栏）互不影响。
+     * <p>关闭后本模组完全停用：不响应快捷键，也不显示任何入口。
+     * 本开关只控制本模组自身，与车万女仆自带的
+     * {@code enable_maid_curios}（是否启用女仆饰品栏）互不影响。
      */
     public static final ForgeConfigSpec.BooleanValue ENABLE_MANAGER;
-
-    /**
-     * 【已停用】原来控制「是否必须潜行右键女仆才打开界面」。
-     *
-     * <p>「潜行 + 右键女仆」这个入口已按需求移除，因此该项不再有任何作用。
-     * 保留字段是为了不破坏玩家已有的配置文件；将来如确认无需保留可整体删除。
-     *
-     * @deprecated 右键入口已移除，此项无效。
-     */
-    @Deprecated
-    public static final ForgeConfigSpec.BooleanValue REQUIRE_SNEAK;
 
     /** 每类饰品槽位通过本模组最多可扩充到的槽位数上限。 */
     public static final ForgeConfigSpec.IntValue MAX_SLOTS_PER_TYPE;
@@ -42,24 +40,16 @@ public final class MaidCuriosConfig {
         ENABLE_MANAGER = builder
                 .comment(
                         "Master switch for Maid Curios Manager.",
-                        "本模组的总开关。关闭后：按键不响应、右键女仆不再打开饰品管理界面、女仆界面上的入口也不显示。",
+                        "本模组的总开关。关闭后快捷键不响应，也不会显示任何入口。",
                         "This only controls this mod. It does NOT change Touhou Little Maid's own",
                         "'enable_maid_curios' option, which is what actually enables the maid's curio slots.",
                         "它不影响车万女仆自带的 enable_maid_curios（那才是真正启用女仆饰品栏的开关）。")
                 .define("enableManager", true);
 
-        REQUIRE_SNEAK = builder
-                .comment(
-                        "DEPRECATED - has no effect. The 'sneak + right-click a maid' entry point was removed;",
-                        "the only entry point is the rebindable hotkey used inside the maid GUI.",
-                        "【已停用】该项已无效：潜行右键女仆的入口已被移除，",
-                        "现在唯一的入口是女仆界面内的可改键快捷键。保留仅为兼容旧配置文件。")
-                .define("requireSneak", true);
-
         MAX_SLOTS_PER_TYPE = builder
                 .comment(
                         "Maximum allowed slots per curio slot type after growing via this mod.",
-                        "每类饰品槽位通过本模组最多可扩充到的槽位数（默认与事实上限 64 一致）。")
+                        "每类饰品槽位通过本模组最多可扩充到的槽位数（64 即事实上限）。")
                 .defineInRange("maxSlotsPerType", 64, 1, 64);
 
         MAX_STACK_COUNT = builder
