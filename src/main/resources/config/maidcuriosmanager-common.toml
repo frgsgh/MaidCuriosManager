@@ -1,0 +1,11 @@
+# Maid Curios Manager - 女仆饰品管理 默认配置
+# 实际生效的配置文件在游戏运行后生成于 config/maidcuriosmanager-common.toml，
+# 此处内容为项目内的打包样例，随模组 JAR 一起分发。
+
+[general]
+    # 潜行时右键女仆才会打开饰品管理界面，避免与车万女仆自带右键菜单冲突
+    requireSneak = true
+    # 每类饰品槽位通过本模组最多可扩充到的槽位数
+    maxSlotsPerType = 8
+    # 单个饰品槽位可通过本模组设置的堆叠数量上限
+    maxStackCount = 64

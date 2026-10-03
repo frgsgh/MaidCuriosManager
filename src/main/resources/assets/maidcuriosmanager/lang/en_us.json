@@ -1,0 +1,17 @@
+{
+  "maidcuriosmanager.gui.title": "Maid Curio Manager",
+  "maidcuriosmanager.gui.subtitle": "Curios data of",
+  "maidcuriosmanager.gui.no_slots": "No usable curio slots. Install Curios and enable 'maid curio slots' in the Touhou Little Maid config.",
+  "maidcuriosmanager.gui.header_slots": "%s/%s slots",
+  "maidcuriosmanager.gui.slot_minus": "-Slot",
+  "maidcuriosmanager.gui.slot_plus": "+Slot",
+  "maidcuriosmanager.gui.count_minus": "-",
+  "maidcuriosmanager.gui.count_plus": "+",
+  "maidcuriosmanager.gui.save": "Save",
+  "maidcuriosmanager.gui.reset": "Reset",
+  "maidcuriosmanager.gui.nbt_view": "NBT",
+  "maidcuriosmanager.gui.nbt_back": "List",
+  "maidcuriosmanager.gui.saved": "Saved to the maid's NBT",
+  "maidcuriosmanager.gui.unsaved": "Unsaved changes: %s",
+  "maidcuriosmanager.gui.nbt_hint": "Read-only preview of the curio NBT data (scroll to browse)"
+}

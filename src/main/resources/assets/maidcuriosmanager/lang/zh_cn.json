@@ -1,0 +1,17 @@
+{
+  "maidcuriosmanager.gui.title": "饰品管理",
+  "maidcuriosmanager.gui.subtitle": "饰品数据 ·",
+  "maidcuriosmanager.gui.no_slots": "未发现可用的饰品槽位。请确认已安装 Curios，并在车万女仆配置中启用「女仆饰品槽位」(EnableMaidCurios)。",
+  "maidcuriosmanager.gui.header_slots": "%s/%s 槽",
+  "maidcuriosmanager.gui.slot_minus": "-槽",
+  "maidcuriosmanager.gui.slot_plus": "+槽",
+  "maidcuriosmanager.gui.count_minus": "-",
+  "maidcuriosmanager.gui.count_plus": "+",
+  "maidcuriosmanager.gui.save": "保存",
+  "maidcuriosmanager.gui.reset": "重置",
+  "maidcuriosmanager.gui.nbt_view": "NBT",
+  "maidcuriosmanager.gui.nbt_back": "列表",
+  "maidcuriosmanager.gui.saved": "已写入女仆 NBT",
+  "maidcuriosmanager.gui.unsaved": "未保存修改：%s",
+  "maidcuriosmanager.gui.nbt_hint": "饰品 NBT 数据预览（只读，滚轮浏览）"
+}

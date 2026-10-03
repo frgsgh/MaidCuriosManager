@@ -1,0 +1,45 @@
+modLoader="javafml"
+loaderVersion="${loader_version_range}"
+license="${mod_license}"
+issueTrackerURL=""
+
+[[mods]]
+modId="${mod_id}"
+version="${mod_version}"
+displayName="${mod_name}"
+credits="Bubble"
+authors="${mod_authors}"
+description='''通过 GUI 管理车万女仆（及所有 Curios 实体）饰品数据的小工具模组。
+
+功能：
+- 潜行 + 右键女仆打开「饰品管理」界面（可用配置取消潜行要求）
+- 列出女仆身上所有 Curios 饰品槽位与已装备饰品
+- 增减每类槽位数量（收缩时自动保护末尾占用的饰品，防止丢失）
+- 通过 −/+ 按钮或输入框修改饰品堆叠数量
+- 支持「保存 / 重置」，修改会应用到服务端女仆实体并写入其 NBT
+
+兼容性：
+- 必需依赖 Curios（Forge）
+- 与车万女仆（Touhou Little Maid）软兼容：未安装时模组正常加载但没有交互入口
+- 潜行右键不影响车万女仆自带的右键菜单（普通右键行为不变）'''
+
+[[dependencies.${mod_id}]]
+    modId="forge"
+    mandatory=true
+    versionRange="${forge_version_range}"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.${mod_id}]]
+    modId="curios"
+    mandatory=true
+    versionRange="[5.9,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.${mod_id}]]
+    modId="touhou_little_maid"
+    mandatory=false
+    versionRange="[1,)"
+    ordering="AFTER"
+    side="BOTH"
